@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-    <p>修改分之代码</p>
+    <input type="text" v-model="username">
+    <input type="password" v-model="password">
+    <button v-on:click="handle">测试</button>
   </div>
 </template>
 
@@ -11,8 +11,21 @@ import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'App',
+  data(){
+    return {
+      username:'',
+      password:''
+    }
+  },
   components: {  
     HelloWorld
+  },
+  methods:{
+    handle(){
+      this.$http.post('api/api/user/login',{userName:this.username,password:this.password}).then((res)=>{
+        console.log(res)
+      })
+    }
   }
 }
 </script>
